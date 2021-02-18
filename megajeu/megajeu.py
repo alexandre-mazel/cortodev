@@ -83,6 +83,7 @@ class Game(object):
             terrain_h = (rTime/rTimeIntro)*terrain_h
 
         terrain_x = (w-terrain_l)//2
+        terrain_x2 = terrain_x+terrain_l
         terrain_y = (h-terrain_h)//2
         terrain_y2 = terrain_y+terrain_h
         
@@ -90,10 +91,15 @@ class Game(object):
         pg.draw.circle( self.screen,colBlack,( centre_x,centre_y),cercle_rayon,2)
         pg.draw.line( self.screen,colBlack,( centre_x,terrain_y+reduit_ligne),(centre_x,terrain_y2-reduit_ligne),2)  
         
+        but_h = terrain_h //2
+        but_y = (terrain_h-but_h)//2
         if rTime > rTimeIntro:
             # dessine les buts
-            
+            pass
+            pg.draw.rect( self.screen, colBlack, (terrain_x,but_y+terrain_y,40,but_h),2 ) 
+            pg.draw.rect( self.screen, colBlack, (terrain_x2-40,but_y+terrain_y,40,but_h),2 ) 
         
+
     # draw - end
 
 
