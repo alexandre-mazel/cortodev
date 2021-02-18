@@ -3,6 +3,7 @@ import pygame as pg
 import pygame.freetype  # Import the freetype module.
 import random
 import time
+import sys
 
 
 class Game(object):
@@ -53,19 +54,45 @@ class Game(object):
         colBlack = (0,0,0)
         colDark1 = (22,22,22)
         colBlue1 = (164,194,244)
-        colBotsSkin = (243,243,243)
-        colBotsMicro = (153,153,153)
+
         
         #~ fontSys = pygame.freetype.Font("../fonts/SF-UI-Display-Regular.otf", 20)
-        #~ fontSysSmall = pygame.freetype.Font("../fonts/SF-Compact-Text-Semibold.otf", 15)
-        #~ fontTxt = pygame.freetype.Font("../fonts/SF-UI-Display-Regular.otf", 20)
-        
+
+        rTime = pg.time.get_ticks()/1000
         
         w = self.w
         h = self.h
         
         self.screen.fill( colBackground )
 
+        
+        terrain_l = 1000
+        terrain_h = 500
+
+        centre_x = w//2
+        centre_y = h//2
+        
+        # animation de debut
+        cercle_rayon = 200
+        reduit_ligne = 0
+        rTimeIntro = 1.5
+        if rTime < rTimeIntro:
+            cercle_rayon = (rTime/rTimeIntro)*cercle_rayon
+            reduit_ligne = (1-(rTime/rTimeIntro))*(terrain_h//8)
+            terrain_l = (rTime/rTimeIntro)*terrain_l
+            terrain_h = (rTime/rTimeIntro)*terrain_h
+
+        terrain_x = (w-terrain_l)//2
+        terrain_y = (h-terrain_h)//2
+        terrain_y2 = terrain_y+terrain_h
+        
+        pg.draw.rect( self.screen, colBlack, (terrain_x,terrain_y,terrain_l,terrain_h),2 )
+        pg.draw.circle( self.screen,colBlack,( centre_x,centre_y),cercle_rayon,2)
+        pg.draw.line( self.screen,colBlack,( centre_x,terrain_y+reduit_ligne),(centre_x,terrain_y2-reduit_ligne),2)  
+        
+        if rTime > rTimeIntro:
+            # dessine les buts
+            
         
     # draw - end
 
@@ -99,7 +126,7 @@ class Game(object):
 #class Game - end
 
 def runGame():
-    g = Game((700//2,720))
+    g = Game((1366,768))
     g.main_loop()
     pg.quit()
     
