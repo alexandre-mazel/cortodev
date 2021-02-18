@@ -77,10 +77,10 @@ class Game(object):
         reduit_ligne = 0
         rTimeIntro = 1.5
         if rTime < rTimeIntro:
-            cercle_rayon = (rTime/rTimeIntro)*cercle_rayon
-            reduit_ligne = (1-(rTime/rTimeIntro))*(terrain_h//8)
-            terrain_l = (rTime/rTimeIntro)*terrain_l
-            terrain_h = (rTime/rTimeIntro)*terrain_h
+            cercle_rayon = int((rTime/rTimeIntro)*cercle_rayon)
+            reduit_ligne = int((1-(rTime/rTimeIntro))*(terrain_h//8))
+            terrain_l = int((rTime/rTimeIntro)*terrain_l)
+            terrain_h = int((rTime/rTimeIntro)*terrain_h)
 
         terrain_x = (w-terrain_l)//2
         terrain_x2 = terrain_x+terrain_l
